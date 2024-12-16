@@ -1,12 +1,20 @@
 import React from 'react';
-import { SafeAreaView } from 'react-native';
+import { SafeAreaView,Button } from 'react-native';
 import AddEntryScreen from './AddEntryScreen';
 import { StyleSheet } from 'react-native';
+import { useState } from 'react';
+import ViewEntriesScreen from './ViewEntriesScreen';
 
 export default function App() {
+    const [showEntries, setShowEntries] = useState(false);
+
     return (
         <SafeAreaView style={{ flex: 1 }}>
-            <AddEntryScreen />
+            <Button
+                title={showEntries ? "Add New Entry" : "View Logged Entries"}
+                onPress={() => setShowEntries(!showEntries)}
+            />
+            {showEntries ? <ViewEntriesScreen /> : <AddEntryScreen />}
         </SafeAreaView>
     );
 }
