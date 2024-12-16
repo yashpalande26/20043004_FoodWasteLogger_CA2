@@ -1,13 +1,16 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { SafeAreaView } from 'react-native';
+import AddEntryScreen from './AddEntryScreen';
+import { StyleSheet } from 'react-native';
 
 export default function App() {
     return (
-        <View style={styles.container}>
-            <Text style={styles.text}>Hello, Food Waste Logger!</Text>
-        </View>
+        <SafeAreaView style={{ flex: 1 }}>
+            <AddEntryScreen />
+        </SafeAreaView>
     );
 }
+
 
 const styles = StyleSheet.create({
     container: {
