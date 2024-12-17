@@ -4,28 +4,30 @@ import AddEntryScreen from './AddEntryScreen';
 import { StyleSheet } from 'react-native';
 import { useState } from 'react';
 import ViewEntriesScreen from './ViewEntriesScreen';
+import StatisticsScreen from './StatisticsScreen';
+
 
 export default function App() {
-  const [showEntries, setShowEntries] = useState(false);
-  const [refreshEntries, setRefreshEntries] = useState(false);
-
-  const handleEntryAdded = () => {
-      setRefreshEntries(!refreshEntries); // Toggle refresh to reload entries
-  };
-
-  return (
-      <SafeAreaView style={{ flex: 1 }}>
-          <Button
-              title={showEntries ? 'Add New Entry' : 'View Logged Entries'}
-              onPress={() => setShowEntries(!showEntries)}
-          />
-          {showEntries ? (
-              <ViewEntriesScreen key={refreshEntries} />
-          ) : (
-              <AddEntryScreen onEntryAdded={handleEntryAdded} />
-          )}
-      </SafeAreaView>
-  );
+    const [screen, setScreen] = useState('add'); 
+    return (
+        <SafeAreaView style={{ flex: 1 }}>
+            <Button
+                title="Add New Entry"
+                onPress={() => setScreen('add')}
+            />
+            <Button
+                title="View Logged Entries"
+                onPress={() => setScreen('view')}
+            />
+            <Button
+                title="View Statistics"
+                onPress={() => setScreen('stats')}
+            />
+            {screen === 'add' && <AddEntryScreen />}
+            {screen === 'view' && <ViewEntriesScreen />}
+            {screen === 'stats' && <StatisticsScreen />}
+        </SafeAreaView>
+    );
 }
 
 
