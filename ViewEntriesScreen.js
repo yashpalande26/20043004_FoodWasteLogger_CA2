@@ -1,16 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, FlatList, StyleSheet } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function ViewEntriesScreen() {
     const [entries, setEntries] = useState([]);
 
     // Load entries from AsyncStorage
+    const loadEntries = async () => {
+        try {
+            const storedEntries = await AsyncStorage.getItem('entries');
+            if (storedEntries) {
+                setEntries(JSON.parse(storedEntries));
+            }
+        } catch (error) {
+            console.log('Failed to load entries:', error);
+        }
+    };
+
     useEffect(() => {
-        const mockData = [
-            { id: '1', foodName: 'Apple', quantity: '2', reason: 'Spoiled' },
-            { id: '2', foodName: 'Banana', quantity: '3', reason: 'Overripe' },
-        ];
-        setEntries(mockData);
+        loadEntries();
     }, []);
 
     return (

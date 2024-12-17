@@ -6,17 +6,26 @@ import { useState } from 'react';
 import ViewEntriesScreen from './ViewEntriesScreen';
 
 export default function App() {
-    const [showEntries, setShowEntries] = useState(false);
+  const [showEntries, setShowEntries] = useState(false);
+  const [refreshEntries, setRefreshEntries] = useState(false);
 
-    return (
-        <SafeAreaView style={{ flex: 1 }}>
-            <Button
-                title={showEntries ? "Add New Entry" : "View Logged Entries"}
-                onPress={() => setShowEntries(!showEntries)}
-            />
-            {showEntries ? <ViewEntriesScreen /> : <AddEntryScreen />}
-        </SafeAreaView>
-    );
+  const handleEntryAdded = () => {
+      setRefreshEntries(!refreshEntries); // Toggle refresh to reload entries
+  };
+
+  return (
+      <SafeAreaView style={{ flex: 1 }}>
+          <Button
+              title={showEntries ? 'Add New Entry' : 'View Logged Entries'}
+              onPress={() => setShowEntries(!showEntries)}
+          />
+          {showEntries ? (
+              <ViewEntriesScreen key={refreshEntries} />
+          ) : (
+              <AddEntryScreen onEntryAdded={handleEntryAdded} />
+          )}
+      </SafeAreaView>
+  );
 }
 
 
