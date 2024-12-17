@@ -1,10 +1,10 @@
 import React from 'react';
 import { SafeAreaView,Button } from 'react-native';
-import AddEntryScreen from './AddEntryScreen';
+import AddEntryScreen from '../screens/AddEntryScreen';
 import { StyleSheet } from 'react-native';
 import { useState } from 'react';
-import ViewEntriesScreen from './ViewEntriesScreen';
-import StatisticsScreen from './StatisticsScreen';
+import ViewEntriesScreen from '../screens/ViewEntriesScreen';
+import StatisticsScreen from '../screens/StatisticsScreen';
 
 
 export default function App() {
